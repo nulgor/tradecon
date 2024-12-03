@@ -18,8 +18,9 @@ for element in table.find_all(['thead', 'tr']):
         cols = [ele.text.strip() for ele in cols]
         row_data = [ele for ele in cols if ele]
         if date_str:
-            row_data.append(date_str)
+            row_data.insert(0, date_str)
         data.append(row_data)
 
 df = pd.DataFrame(data[1:])
-print(df.dropna(subset=[3]).head(20))
+df.columns = ['Date', 'Time', 'Country', 'Event', 'Actual', 'Previous', 'Consensus', 'Forecast']
+print(df.dropna(subset=[4]).head(20))
