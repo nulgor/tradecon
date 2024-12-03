@@ -15,4 +15,11 @@ for row in table.find_all('tr'):
     data.append([ele for ele in cols if ele])
 
 df = pd.DataFrame(data)
+
+# Extract date from table header
+date_str = soup.find('table', id='calendar').find('th').text.strip()
+
+# Add date column to DataFrame
+df['Date'] = date_str
+
 print(df)
