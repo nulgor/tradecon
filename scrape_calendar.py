@@ -9,17 +9,18 @@ soup = BeautifulSoup(html_content, 'html.parser')
 table = soup.find('table', id='calendar')
 
 data = []
-for row in table.find_all('tr'):
-    cols = row.find_all('td')
-    cols = [ele.text.strip() for ele in cols]
-    data.append([ele for ele in cols if ele])
+date_str = None
+for element in table.find_all(['thead', 'tr']):
+    if element.name == 'thead':
+        date_str = element.find('th').text.strip()
+    elif element.name == 'tr':
+        cols = element.find_all('td')
+        cols = [ele.text.strip() for ele in cols]
+        row_data = [ele for ele in cols if ele]
+        if date_str:
+            row_data.append(date_str)
+        data.append(row_data)
 
 df = pd.DataFrame(data)
-
-# Extract date from table header
-date_str = soup.find('table', id='calendar').find('th').text.strip()
-
-# Add date column to DataFrame
-df['Date'] = date_str
-
+df.columns = ['Time', 'Country', 'Event', 'Actual', 'Previous', 'Consensus', 'Forecast', 'Date']
 print(df)
