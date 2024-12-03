@@ -29,7 +29,10 @@ for element in table.find_all(['thead', 'tr']):
         reference_col = element.find('span', class_='calendar-reference')
         
         # Add event and reference text to row_data
-        event_text = event_col.get_text(strip=True) if event_col else None  # Use None if event_text is empty
+        if event_col:
+            event_text = event_col.get_text(strip=True)
+        else:
+            event_text = cols[2].text.strip()
         reference_text = reference_col.get_text(strip=True) if reference_col else None  # Use None if reference_text is empty
         
         # Insert the date and add event and reference text
