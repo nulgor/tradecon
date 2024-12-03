@@ -23,24 +23,15 @@ for element in table.find_all(['thead', 'tr']):
         # Clean and filter data
         cols = [ele.text.strip().replace('Â', '').replace('\n', '').replace('â', '').replace('®', '').replace('‚¬', '€') for ele in cols]
         row_data = [ele for ele in cols if ele]
-        event_parts = row_data[3].rsplit(' ', 1)
-        row_data[3] = event_parts[0]
-        row_data.insert(4, event_parts[1])
-        reference = element.find('span', class_='calendar-reference')
-        if reference:
-            row_data.append(reference.text.strip())
-        else:
-            row_data.append(None)
         if date_str:
             row_data.insert(0, date_str)
         data.append(row_data)
 
 # Create DataFrame
 df = pd.DataFrame(data[1:])
-# df.columns = ['Date', 'Time', 'Country', 'Event', 'EventRef', 'Actual', 'Previous', 'Consensus', 'Forecast', 'Reference']
 
 # Remove extra spaces from all values
 df = df.applymap(lambda x: str(x).strip() if isinstance(x, str) else x)
 df = df.drop(columns=[2])
 # Print the last 50 rows, filtering rows where column 4 (index 4) is not null
-print(df.dropna(subset=[5]).head(50))
+print(df.dropna(subset=[4]).head(50))
