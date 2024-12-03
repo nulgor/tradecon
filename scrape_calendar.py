@@ -22,5 +22,4 @@ for element in table.find_all(['thead', 'tr']):
         data.append(row_data)
 
 df = pd.DataFrame(data[1:])
-df.columns = ['Time', 'Country', 'Event', 'Actual', 'Previous', 'Consensus', 'Forecast', 'Date']
-print(df)
+print(df.dropna(subset=[3]).head(20))
