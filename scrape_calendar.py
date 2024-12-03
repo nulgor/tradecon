@@ -15,7 +15,7 @@ for element in table.find_all(['thead', 'tr']):
         date_str = element.find('th').text.strip()
     elif element.name == 'tr':
         cols = element.find_all('td')
-        cols = [ele.text.strip().replace('Â', '').replace('\n', '') for ele in cols]
+        cols = [ele.text.strip().replace('Â', '').replace('\n', '').replace('â', '').replace('®', '') for ele in cols]
         row_data = [ele for ele in cols if ele]
         if date_str:
             row_data.insert(0, date_str)
