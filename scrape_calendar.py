@@ -34,7 +34,7 @@ for element in table.find_all(['thead', 'tr']):
 
 # Create DataFrame
 df = pd.DataFrame(data[1:])
-df.columns = ['Date', 'Time', 'Country', 'Event', 'Actual', 'Previous', 'Consensus', 'Forecast', 'Reference']
+# df.columns = ['Date', 'Time', 'Country', 'Event', 'Actual', 'Previous', 'Consensus', 'Forecast', 'Reference']
 
 # Remove extra spaces from all values
 df = df.applymap(lambda x: str(x).strip() if isinstance(x, str) else x)
