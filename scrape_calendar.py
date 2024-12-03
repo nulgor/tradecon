@@ -21,6 +21,6 @@ for element in table.find_all(['thead', 'tr']):
             row_data.append(date_str)
         data.append(row_data)
 
-df = pd.DataFrame(data)
+df = pd.DataFrame(data[1:])
 df.columns = ['Time', 'Country', 'Event', 'Actual', 'Previous', 'Consensus', 'Forecast', 'Date']
 print(df)
