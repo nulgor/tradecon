@@ -1,7 +1,7 @@
 
 
 
-# Trading Economics Calendar Scraper
+# Calendar Scraper
 
 This project scrapes data from the Trading Economics calendar and saves it to an Excel file.
 
